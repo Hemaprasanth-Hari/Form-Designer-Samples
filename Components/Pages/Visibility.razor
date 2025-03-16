@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+<!-- Button group to add form fields with different visibility modes -->
 <div class="button-group">
     <SfButton OnClick="AddVisibleField">Add Visible Textbox</SfButton>
     <SfButton OnClick="AddHiddenField">Add Hidden Textbox</SfButton>
@@ -7,6 +8,7 @@
     <SfButton OnClick="AddHiddenPrintField">Add Hidden Printable Textbox</SfButton>
 </div>
 
+<!-- PDF Viewer container where the form fields will be added -->
 <div class="Pdf-viewer-container">
     <SfPdfViewer2 @ref="PdfViewerInstance" DocumentPath="wwwroot/data/Form_Fields_with_Visibility_Property.pdf"
                   Height="650px"
@@ -15,27 +17,24 @@
 </div>
 
 @code {
+    // Reference to the SfPdfViewer2 instance
     SfPdfViewer2 PdfViewerInstance { get; set; }
 
-    /// <summary>
-    /// Adds a form field that is always visible in both the viewer and the printed document.
-    /// </summary>
+    // Adds a form field that is always visible in both the viewer and the printed document
     private async void AddVisibleField()
     {
         await PdfViewerInstance.AddFormFieldsAsync(
             [new TextBoxField {
-                Name = "Visible",
-                Value = "Visible",
-                Bounds = new Bound { X = 270, Y = 250, Height = 30, Width = 200 },
-                PageNumber = 1,
-                Visibility = VisibilityMode.Visible
+                Name = "Visible",  
+                Value = "Visible",  
+                Bounds = new Bound { X = 270, Y = 250, Height = 30, Width = 200 }, 
+                PageNumber = 1,  
+                Visibility = VisibilityMode.Visible  
             }]
         );
     }
 
-    /// <summary>
-    /// Adds a form field that remains completely hidden in both the viewer and print mode.
-    /// </summary>
+    // Adds a form field that remains completely hidden in both the viewer and print mode
     private async void AddHiddenField()
     {
         await PdfViewerInstance.AddFormFieldsAsync(
@@ -44,14 +43,12 @@
                 Value = "Hidden",
                 Bounds = new Bound { X = 270, Y = 430, Height = 30, Width = 200 },
                 PageNumber = 1,
-                Visibility = VisibilityMode.Hidden
+                Visibility = VisibilityMode.Hidden  
             }]
         );
     }
 
-    /// <summary>
-    /// Adds a form field that appears in the viewer but is excluded from printing.
-    /// </summary>
+    // Adds a form field that appears in the viewer but is excluded from printing
     private async void AddVisibleNotPrintField()
     {
         await PdfViewerInstance.AddFormFieldsAsync(
@@ -60,14 +57,12 @@
                 Value = "VisibleNotPrintable",
                 Bounds = new Bound { X = 270, Y = 620, Height = 30, Width = 200 },
                 PageNumber = 1,
-                Visibility = VisibilityMode.VisibleNotPrintable
+                Visibility = VisibilityMode.VisibleNotPrintable  
             }]
         );
     }
 
-    /// <summary>
-    /// Adds a form field that is hidden in the viewer but appears in the printed document.
-    /// </summary>
+    // Adds a form field that is hidden in the viewer but appears in the printed document
     private async void AddHiddenPrintField()
     {
         await PdfViewerInstance.AddFormFieldsAsync(
@@ -76,11 +71,13 @@
                 Value = "HiddenPrintable",
                 Bounds = new Bound { X = 270, Y = 780, Height = 30, Width = 200 },
                 PageNumber = 1,
-                Visibility = VisibilityMode.HiddenPrintable
+                Visibility = VisibilityMode.HiddenPrintable  
             }]
         );
     }
 }
+
+<!-- Styling to align buttons and provide spacing -->
 <style>
     .button-group {
         display: flex;
